@@ -47,7 +47,7 @@ app.post('/callbacks/create', function(req, res) {
 		redis_client.zadd(['callbacks', callback.time, JSON.stringify(callback)], function(err, resp) {
 			if(err) throw err;
 			console.log('added callback', callback);
-			res.send(200);
+			res.send(201);
 		});
 	}
 });
