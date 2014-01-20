@@ -1,0 +1,20 @@
+{
+  "name": "callback_clock",
+  "version": "0.0.0",
+  "description": "Service that will make an HTTP request to a given URL with given parameters at a given time.",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pete.vilter@gmail.com",
+  "license": "MIT",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "redis": "~0.10.0",
+    "logfmt": "~0.18.1",
+    "express": "~3.4.8",
+    "hiredis": "~0.1.16"
+  }
+}

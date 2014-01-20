@@ -1,0 +1,24 @@
+This is CallbackClock.
+
+Interface:
+
+POST /callbacks/create
+  params:
+    url: string // url to request
+    method: string // HTTP method to use
+    time: integer // seconds since unix epoch
+    params: map from strings to strings, encoded as a JSON string
+      e.g. '{"my_param": 1, "my_other_param": 2}'
+  response
+    201 with empty body if it worked
+    400 if bad params
+
+GET /callbacks/
+  response:
+    json list of callback objects
+    callback object:
+      {
+        urL: string
+        method: string
+        params: JSON-encoded string
+      }
