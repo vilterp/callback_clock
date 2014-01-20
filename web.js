@@ -10,10 +10,7 @@ app.disable('etag');
 app.use(logfmt.requestLogger());
 app.use(express.urlencoded());
 
-console.log(process.env);
-
 // connect to redis
-client = redis.createClient();
 if(process.env.REDISTOGO_URL) {
 	var rtg = url.parse(process.env.REDISTOGO_URL);
 	var redis_client = redis.createClient(rtg.port, rtg.hostname);
@@ -21,7 +18,7 @@ if(process.env.REDISTOGO_URL) {
 } else {
 	var redis_client = redis.createClient();
 }
-client.on('ready', function(evt) {
+redis_client.on('ready', function(evt) {
 	console.log('connected to redis at ' + redis_client.host + ':' + redis_client.port);
 });
 
