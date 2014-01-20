@@ -1,18 +1,21 @@
 var http = require('http');
 var querystring = require('querystring');
+var optimist = require('optimist');
+
+var opts = optimist.argv;
 
 var post_data = querystring.stringify({
-	time: Math.round(new Date().getTime() / 1000) + 10,
-	method: 'GET',
-	url: 'http://localhost:5000/',
-	params: '{}'
+	time: opts.time || Math.round(new Date().getTime() / 1000) + 10,
+	method: opts.method || 'GET',
+	url: opts.url || 'http://localhost:5000/',
+	params: opts.params || '{}'
 });
 
 console.log(post_data);
 
 var options = {
-	host: 'localhost',
-	port: '5000',
+	host: 'callback-clock.herokuapp.com',
+	port: '80',
 	path: '/callbacks/create',
 	method: 'POST',
 	headers: {

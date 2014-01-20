@@ -8,7 +8,7 @@ POST /callbacks/create
     method: string // HTTP method to use
     time: integer // seconds since unix epoch
     params: map from strings to strings, encoded as a JSON string
-      e.g. '{"my_param": 1, "my_other_param": 2}'
+      e.g. '{"my_param": "1", "my_other_param": "2"}'
   response
     201 with empty body if it worked
     400 if bad params

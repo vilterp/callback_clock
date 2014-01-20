@@ -26,7 +26,12 @@ function make_request(callback, cb) {
 	if(callback.method == 'GET') {
 		options.query = querystring.stringify(callback.params);
 	}
-	var req = http.request(options, cb);
+	var req = http.request(options, function(resp) {
+		cb(null, resp)
+	});
+	req.on('error', function(err) {
+		cb(err);
+	})
 	if(callback.method == 'POST') {
 		req.write(querystring.stringify(callback.params));
 	}
@@ -39,10 +44,10 @@ setInterval(function() {
 	var end_interval = current_secs + interval/1000 - 1;
 	console.log('check ' + current_secs + ' to ' + end_interval);
 	redis_client.zrangebyscore('callbacks', -Infinity, end_interval, function(err, elements) {
+		if(err) throw err;
 		redis_client.zremrangebyscore('callbacks', -Infinity, end_interval, function(err, resp) {
 			if(err) throw err;
-		})
-		if(err) throw err;
+		});
 		var callbacks = elements.map(JSON.parse);
 		callbacks.forEach(function(callback) {
 			make_request(callback, function(res) {
