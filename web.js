@@ -8,7 +8,7 @@ var app = express();
 
 app.disable('etag');
 app.use(logfmt.requestLogger());
-app.use(express.bodyParser());
+app.use(express.urlencoded());
 
 // connect to redis
 client = redis.createClient();
@@ -21,7 +21,7 @@ if(process.env.REDISTOGO_URL) {
 }
 client.on('ready', function(evt) {
 	console.log('connected to redis at ' + redis_client.host + ':' + redis_client.port);
-})
+});
 
 // define app
 app.get('/', function(req, res) {
