@@ -10,6 +10,8 @@ app.disable('etag');
 app.use(logfmt.requestLogger());
 app.use(express.urlencoded());
 
+console.log(process.env);
+
 // connect to redis
 client = redis.createClient();
 if(process.env.REDISTOGO_URL) {
