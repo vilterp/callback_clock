@@ -50,7 +50,10 @@ setInterval(function() {
 		});
 		var callbacks = elements.map(JSON.parse);
 		callbacks.forEach(function(callback) {
-			make_request(callback, function(res) {
+			make_request(callback, function(err, res) {
+				if(err) {
+					console.log(callback.method + ' ' + callback.url + ' => ' + err);
+				}
 				console.log(callback.method + ' ' + callback.url + ' => ' + res.statusCode);
 			});
 		});
